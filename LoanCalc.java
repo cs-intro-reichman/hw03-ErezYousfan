@@ -47,7 +47,7 @@ public class LoanCalc {
 		while (!found && guess < loan) {
 			double end = endBalance(loan, rate, n, guess);
 			if (Math.abs(end) > epsilon) {
-				guess += (epsilon * 0.001);
+				guess += (epsilon * 0.01);
 				iterationCounter++;
 			}
 			else {
@@ -103,8 +103,9 @@ public class LoanCalc {
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// Replace the following statement with your code
 		double subLoan = loan;
+		double newRate = 1 + (rate / 100);
 		for (int i = 0; i < n; i++) {
-			subLoan = (subLoan - payment) * rate;
+			subLoan = (subLoan - payment) * newRate;
 		}
     	return subLoan;
 	}
