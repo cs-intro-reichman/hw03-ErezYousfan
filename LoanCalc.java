@@ -44,10 +44,10 @@ public class LoanCalc {
 		double guess = loan / n;
 		boolean found = false;
 		
-		while (!found && guess < loan) {
+		while (!found) {
 			double end = endBalance(loan, rate, n, guess);
-			if (Math.abs(end) > epsilon) {
-				guess += (epsilon * 0.01);
+			if (end > 0) {
+				guess += epsilon;
 				iterationCounter++;
 			}
 			else {
@@ -73,7 +73,7 @@ public class LoanCalc {
 		// Set g to (𝐿 + 𝐻)/2
 		iterationCounter = 1;
 		double L = loan / n;
-		double H = L + L * rate;
+		double H = loan;
 		double g = (H + L) / 2;
 		while ((H - L) > epsilon) {
 			// Sets L and H for the next iteration
