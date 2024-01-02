@@ -47,7 +47,7 @@ public class LoanCalc {
 		while (!found && guess < loan) {
 			double end = endBalance(loan, rate, n, guess);
 			if (Math.abs(end) > epsilon) {
-				guess += (epsilon * 0.01);
+				guess += (epsilon * 0.001);
 				iterationCounter++;
 			}
 			else {
