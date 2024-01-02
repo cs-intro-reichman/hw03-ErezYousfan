@@ -40,7 +40,22 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
     	// Replace the following statement with your code
-    	return 0;
+		iterationCounter = 1;
+		double guess = loan / n;
+		boolean found = false;
+		
+		while (!found && guess < loan) {
+			double end = endBalance(loan, rate, n, guess);
+			if (Math.abs(end) > epsilon) {
+				guess += (epsilon * 0.01);
+				iterationCounter++;
+			}
+			else {
+				found = true;
+			}
+		}
+		
+    	return guess;
     }
     
     /**
@@ -52,7 +67,33 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
     	// Replace the following statement with your code
-    	return 0;
+    	// Sets L and H to initial values such that 𝑓(𝐿) > 0, 𝑓(𝐻) < 0,
+		// implying that the function evaluates to zero somewhere between L and H.
+		// So, let’s assume that L and H were set to such initial values.
+		// Set g to (𝐿 + 𝐻)/2
+		iterationCounter = 1;
+		double L = loan / n;
+		double H = L + L * rate;
+		double g = (H + L) / 2;
+		while ((H - L) > epsilon) {
+			// Sets L and H for the next iteration
+			double end = endBalance(loan, rate, n, g);
+			if (end > 0) {
+				// the solution must be between g and H
+				// so set L or H accordingly
+				L = g;
+				g = (H + L) / 2;
+			}
+			else {
+				// the solution must be between L and g
+				// so set L or H accordingly
+				// Computes the mid-value (𝑔) for the next iteration
+				H = g;
+				g = (H + L) / 2;
+			}
+			iterationCounter++;
+		}
+		return g;
     }
 	
 	/**
@@ -61,6 +102,10 @@ public class LoanCalc {
 	*/
 	private static double endBalance(double loan, double rate, int n, double payment) {
 		// Replace the following statement with your code
-    	return 0;
+		double subLoan = loan;
+		for (int i = 0; i < n; i++) {
+			subLoan = (subLoan - payment) * rate;
+		}
+    	return subLoan;
 	}
 }
