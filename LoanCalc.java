@@ -46,13 +46,11 @@ public class LoanCalc {
 		
 		while (!found) {
 			double end = endBalance(loan, rate, n, guess);
-			if (end > 0) {
+			iterationCounter++;
+			if (end > 0)
 				guess += epsilon;
-				iterationCounter++;
-			}
-			else {
+			else 
 				found = true;
-			}
 		}
 		
     	return guess;
