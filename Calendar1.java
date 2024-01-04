@@ -18,10 +18,8 @@ public class Calendar1 {
 	    // Prints each date dd/mm/yyyy in a separate line. If the day is a Sunday, prints "Sunday".
 	    // The following variable, used for debugging purposes, counts how many days were advanced so far.
 	    int sundayCounter = 0;
-		int debbugCounter = 0;
 	 	while (year < 2000) {	
 			String date = dayOfMonth + "/" + month + "/" + year;
-			debbugCounter++;
 			if (dayOfWeek == 1)	{
 				date += " Sunday";
 				if (dayOfMonth == 1)
