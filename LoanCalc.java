@@ -73,7 +73,7 @@ public class LoanCalc {
 		// Set g to (𝐿 + 𝐻)/2
 		iterationCounter = 1;
 		double L = loan / n;
-		double H = L + (L * (100 / rate));
+		double H = loan;
 		double g = (H + L) / 2;
 		while ((H - L) > epsilon) {
 			// Sets L and H for the next iteration
