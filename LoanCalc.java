@@ -40,7 +40,7 @@ public class LoanCalc {
 	// Side effect: modifies the class variable iterationCounter.
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {  
     	// Replace the following statement with your code
-		iterationCounter = 1;
+		iterationCounter = 0;
 		double guess = loan / n;
 		boolean found = false;
 		
@@ -69,27 +69,27 @@ public class LoanCalc {
 		// implying that the function evaluates to zero somewhere between L and H.
 		// So, let’s assume that L and H were set to such initial values.
 		// Set g to (𝐿 + 𝐻)/2
-		iterationCounter = 1;
-		double L = loan / n;
-		double H = loan;
-		double g = (H + L) / 2;
-		while ((H - L) > epsilon) {
+		iterationCounter = 0;
+		double low = loan / n;
+		double high = loan;
+		double g = (high + low) / 2;
+		while ((high - low) > epsilon) {
 			// Sets L and H for the next iteration
 			double end = endBalance(loan, rate, n, g);
+			iterationCounter++;
 			if (end > 0) {
 				// the solution must be between g and H
 				// so set L or H accordingly
-				L = g;
-				g = (H + L) / 2;
+				low = g;
+				g = (high + low) / 2;
 			}
 			else {
 				// the solution must be between L and g
 				// so set L or H accordingly
 				// Computes the mid-value (𝑔) for the next iteration
-				H = g;
-				g = (H + L) / 2;
+				high = g;
+				g = (high + low) / 2;
 			}
-			iterationCounter++;
 		}
 		return g;
     }
